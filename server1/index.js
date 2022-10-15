@@ -28,6 +28,7 @@ app.use("/api/hotels", hotelsRoute);
 app.use("/api/rooms", roomsRoute);
 
 app.use((err, req, res, next) => {
+  console.log("---------", err);
   const errStatus = err.status || 500;
   const errMessage = err.message || "Something went wrong";
   return res.status(errStatus).json({

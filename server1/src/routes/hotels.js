@@ -1,5 +1,6 @@
 import express from "express";
 import Hotel from "../models/Hotel.js";
+import { createError } from "../utils/errorUtil.js";
 const router = express.Router();
 //create
 router.post("/", async (req, res) => {
@@ -40,10 +41,12 @@ router.delete("/:id", async (req, res) => {
 });
 
 //get
+
+//api test custom err localhost:8800/api/hotels/634a3005813f9c000eaa4065
 router.get("/:id", async (req, res, next) => {
   try {
     const hotel = await Hotel.findById(req.params.id);
-    if (hotel === null) return next(new Error("bi null"));
+    if (hotel === null) return next(createError(404, "bi null r kkk"));
     res.status(200).json(hotel);
   } catch (err) {
     // res.status(500).json(err);
