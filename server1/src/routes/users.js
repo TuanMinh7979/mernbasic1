@@ -8,26 +8,28 @@ import {
   getUser,
   updateUser,
 } from "../controllers/UserController.js";
-import { checkAdmin, checkToken } from "../utils/checkToken.js";
+import { checkAdmin, checkToken, checkUser } from "../utils/checkToken.js";
 
 const router = express.Router();
 
+//check cai secret thoi co deo gi dau
 router.get("/checkauthen", checkToken, (req, res, next) => {
   res.send("authensuccess");
 });
+//check payload.isAdmin === true hay khong
 router.get("/checkadmin", checkAdmin, (req, res, next) => {
   res.send("you are admin");
 });
 //update
-router.put("/:id", updateUser);
+router.put("/:id", checkUser, updateUser);
 //delete
 
-router.delete("/:id", deleteUser);
+router.delete("/:id", checkUser, deleteUser);
 
 //get
 
-router.get("/:id", getUser);
+router.get("/:id", checkUser, getUser);
 
 //getall
-router.get("/", getAllUser);
+router.get("/", checkAdmin, getAllUser);
 export default router;
