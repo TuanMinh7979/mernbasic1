@@ -36,7 +36,6 @@ export const login = async (req, res, next) => {
       { id: user._id, isAdmin: user.isAdmin },
       process.env.JWT_SECRET
     );
-    console.log(token);
     const { password, isAdmin, ...otherDetail } = user._doc;
 
     res
