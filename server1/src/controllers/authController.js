@@ -17,3 +17,22 @@ export const register = async (req, res, next) => {
     next(err);
   }
 };
+export const login = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ username: req.body.username });
+    if (!user)
+      return next(createError(404, "wrong username or password(username)"));
+
+    console.log(req.body, user.password);
+    const isPasswordCorrect = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
+    if (!isPasswordCorrect)
+      return next(createError(404, "wrong username or password(pass)"));
+
+    res.status(200).send("login success");
+  } catch (err) {
+    next(err);
+  }
+};
