@@ -26,6 +26,6 @@ router.post("/:hotelid", createRoom);
 router.put("/:id", updateRoom);
 //delete
 
-router.delete("/:id", deleteRoom);
+router.delete("/:id/:hotelid", deleteRoom);
 
 export default router;

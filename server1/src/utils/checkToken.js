@@ -10,13 +10,11 @@ export const checkToken = (req, res, next) => {
   jwt.verify(token, process.env.JWT_SECRET, (err, payload) => {
     if (err) return next(createError(403, "Authenticated failed2"));
     req.user = payload;
-    console.log(">>>authen success fully call next", next);
     return next();
   });
 };
 //
 export const checkUser = (req, res, next) => {
-  console.log("-----------<<<<", req.user, req.params.id);
   if (req.user.id.trim() === req.params.id.trim() || req.user.isAdmin) {
     return next();
   } else {
