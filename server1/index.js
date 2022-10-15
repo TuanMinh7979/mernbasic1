@@ -42,7 +42,7 @@ app.use((err, req, res, next) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("sfbnssdf");
+  res.send("nothing");
 });
 
 app.listen(8800, () => {
