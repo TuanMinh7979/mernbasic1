@@ -40,22 +40,25 @@ router.delete("/:id", async (req, res) => {
 });
 
 //get
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const hotel = await Hotel.findById(req.params.id);
+    if (hotel === null) return next(new Error("bi null"));
     res.status(200).json(hotel);
   } catch (err) {
-    res.status(500).json(err);
+    // res.status(500).json(err);
+    return next(err);
   }
 });
 
 //getall
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   try {
     const hotels = await Hotel.find();
     res.status(200).json(hotels);
   } catch (err) {
-    res.status(500).json(err);
+    // res.status(500).json(err);
+    next(err);
   }
 });
 
