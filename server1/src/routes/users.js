@@ -21,6 +21,9 @@ router.get("/checkadmin", checkAdmin, (req, res, next) => {
   res.send("you are admin");
 });
 //update
+router.use(checkToken);
+router.get("/", checkAdmin, getAllUser);
+
 router.put("/:id", checkUser, updateUser);
 //delete
 
@@ -31,5 +34,5 @@ router.delete("/:id", checkUser, deleteUser);
 router.get("/:id", checkUser, getUser);
 
 //getall
-router.get("/", checkAdmin, getAllUser);
+
 export default router;

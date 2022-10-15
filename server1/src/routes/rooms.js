@@ -1,11 +1,31 @@
 import express from "express";
-const router = express.Router();
-router.get("/", (req, res) => {
-  res.send("hello apui");
-});
+import {
+  createRoom,
+  deleteRoom,
+  getAllRoom,
+  getRoom,
+  updateRoom,
+} from "../controllers/roomController.js";
+import { checkAdmin, checkToken } from "../utils/checkToken.js";
 
-router.get("/register", (req, res) => {
-  res.send("register endpoint");
-});
+const router = express.Router();
+//get
+router.get("/:id", getRoom);
+
+//getall
+router.get("/", getAllRoom);
+
+//admin can do that
+
+router.use(checkToken);
+router.use(checkAdmin);
+//create
+router.post("/:hotelid", createRoom);
+
+//update
+router.put("/:id", updateRoom);
+//delete
+
+router.delete("/:id", deleteRoom);
 
 export default router;

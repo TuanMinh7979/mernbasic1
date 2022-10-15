@@ -12,8 +12,8 @@ const HotelSchema = new Schema({
   title: { type: String, required: true },
   rating: { type: Number, min: 0, max: 5 },
 
-  //one to many hotel 1-n room
-  rooms: { type: [String], min: 0, max: 5 },
+  //one to many hotel 1-n room // cos the thay the bang   type:mongoose.Schema.Types.ObjectId, ref:'Room'
+  rooms: { type: [String] },
   cheapestPrice: { type: Number },
   featured: {
     type: Boolean,
@@ -22,3 +22,4 @@ const HotelSchema = new Schema({
 });
 const Hotel = mongoose.model("hotels", HotelSchema);
 export default Hotel;
+// 1-n hotel 1-n room, hotelmodel  : rooms :[String (room Id)]
