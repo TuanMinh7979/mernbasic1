@@ -9,10 +9,20 @@ import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { faCircleArrowRight } from "@fortawesome/free-solid-svg-icons";
 import MailList from "../../components/mailList/MailList";
 import "./hotel.css";
+import useFetch from "../../hooks/useFetch";
+import { useLocation } from "react-router-dom";
+import { SearchContext } from "../../context/SearchContext";
+import { useContext } from "react";
 function Hotel() {
+  const location = useLocation();
+  const hotelId = location.pathname.split("/")[2];
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
 
+  const { data, loading, error } = useFetch(`/hotels/${hotelId}`);
+
+  const { dates } = useContext(SearchContext);
+  console.log(">>>from context nah", dates);
   const photos = [
     {
       src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707778.jpg?k=56ba0babbcbbfeb3d3e911728831dcbc390ed2cb16c51d88159f82bf751d04c6&o=&hp=1",
@@ -80,7 +90,7 @@ function Hotel() {
         )}
         <div className="hotelWrapper">
           <button className="bookNow">Reserve or Book Now!</button>
-          <h1 className="hotelTitle">Tower Street Apartments</h1>
+          <h1 className="hotelTitle">{data.name}</h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
             <span>Elton St 125 New york</span>
@@ -127,7 +137,7 @@ function Hotel() {
                 excellent location score of 9.8!
               </span>
               <h2>
-                <b>$945</b> (9 nights)
+                <b>{data.cheapestPrice}</b> (9 nights)
               </h2>
               <button>Reserve or Book Now!</button>
             </div>
