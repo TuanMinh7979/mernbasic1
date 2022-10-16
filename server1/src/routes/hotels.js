@@ -5,6 +5,7 @@ import {
   getAllHotel,
   getHotel,
   updateHotel,
+  countByCity,
 } from "../controllers/hotelController.js";
 import { checkAdmin, checkToken } from "../utils/checkToken.js";
 
@@ -14,11 +15,12 @@ const router = express.Router();
 //api test custom err localhost:8800/api/hotels/634a3005813f9c000eaa4065
 
 //home page khong can dang nhap van xem duoc
-router.get("/:id", getHotel);
 
 //getall
 router.get("/", getAllHotel);
-
+router.get("/countByCity", countByCity);
+router.get("/:id", getHotel);
+// router.get("/countByType", getHotels);
 //PHAI DUNG THU TU USER THONG THUONG CHI CO THE GET HOTEL
 //CHU KHONG CO QUYEN THEM SUA XOA
 
