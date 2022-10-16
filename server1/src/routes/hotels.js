@@ -6,6 +6,7 @@ import {
   getHotel,
   updateHotel,
   countByCity,
+  countByType,
 } from "../controllers/hotelController.js";
 import { checkAdmin, checkToken } from "../utils/checkToken.js";
 
@@ -19,6 +20,7 @@ const router = express.Router();
 //getall
 router.get("/", getAllHotel);
 router.get("/countByCity", countByCity);
+router.get("/countByType", countByType);
 router.get("/:id", getHotel);
 // router.get("/countByType", getHotels);
 //PHAI DUNG THU TU USER THONG THUONG CHI CO THE GET HOTEL

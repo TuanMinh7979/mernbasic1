@@ -46,4 +46,5 @@
     "react-hook-form": "^7.37.0",
     "yup": "^0.32.11"
   }
+  ,"proxy":"http://localhost:8800/api"
 }

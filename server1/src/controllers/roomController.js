@@ -8,7 +8,7 @@ export const createRoom = async (req, res, next) => {
 
   try {
     const savedRoom = await newRoom.save();
-    console.log("---------savedRoom", savedRoom);
+
     try {
       await Hotel.findByIdAndUpdate(hotelId, {
         $push: { rooms: savedRoom._id },
