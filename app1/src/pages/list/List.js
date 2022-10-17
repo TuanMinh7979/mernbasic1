@@ -20,16 +20,17 @@ function List() {
   const [min, setMin] = useState(undefined);
   const [max, setMax] = useState(undefined);
 
-  const { data, loading, error, refetch } = useFetch(
+  const { data, loading, error, reFetch } = useFetch(
     `/hotels?city=${destination}&min=${min || 1}&max=${max || 999}`
   );
 
   const hdlClick = () => {
-    // console.log(destination);
-    // console.log(min || 1);
-    // console.log(max || 999);
-    refetch();
+    console.log(destination);
+    console.log(min || 1);
+    console.log(max || 999);
+    reFetch();
   };
+
   return (
     <div>
       <Navbar />
@@ -117,7 +118,7 @@ function List() {
             <button onClick={hdlClick}>Search</button>
           </div>
           <div className="listResult">
-            {data.length}
+            {data && data.length}
             {loading
               ? "loading"
               : data.map((item) => {

@@ -21,8 +21,17 @@ function Hotel() {
 
   const { data, loading, error } = useFetch(`/hotels/${hotelId}`);
 
-  const { dates } = useContext(SearchContext);
-  console.log(">>>from context nah", dates);
+  const { dates, options } = useContext(SearchContext);
+  const MILSE_ADAY = 1000 * 60 * 60 * 24;
+  function dayDiff(date1, date2) {
+    const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    const diffDays = Math.ceil(timeDiff / MILSE_ADAY);
+    return diffDays;
+  }
+
+  console.log(">>>from context nah", dates, options);
+  const days = dayDiff(dates[0].endDate, dates[0].startDate);
+
   const photos = [
     {
       src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707778.jpg?k=56ba0babbcbbfeb3d3e911728831dcbc390ed2cb16c51d88159f82bf751d04c6&o=&hp=1",
@@ -137,7 +146,7 @@ function Hotel() {
                 excellent location score of 9.8!
               </span>
               <h2>
-                <b>{data.cheapestPrice}</b> (9 nights)
+                <b>{data.cheapestPrice}</b> ({days} nights)
               </h2>
               <button>Reserve or Book Now!</button>
             </div>
