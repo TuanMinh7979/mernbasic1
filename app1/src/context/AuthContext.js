@@ -10,30 +10,42 @@ export const AuthContext = createContext(INIT_STATE);
 
 const AuthReducer = (state = INIT_STATE, action) => {
   switch (action.type) {
-    case "LOGIN_START":
+    case "LOGIN_START": {
+      console.log(">>>>>>login start");
       return {
         user: null,
         loading: true,
         error: null,
       };
-    case "LOGIN_SUCCESS":
+    }
+
+    case "LOGIN_SUCCESS": {
+      console.log(">>>>>>login success");
       return {
         user: action.payload,
         loading: false,
         error: null,
       };
-    case "LOGIN_FAILED":
+    }
+
+    case "LOGIN_FAILED": {
+      console.log(">>>>>>login failed");
       return {
         user: null,
         loading: false,
         error: action.payload,
       };
-    case "LOGOUT":
+    }
+
+    case "LOGOUT": {
+      console.log(">>>>>>login failed");
       return {
         user: null,
         loading: false,
         error: null,
       };
+    }
+
     default:
       return state;
   }

@@ -23,7 +23,7 @@ const connect = async () => {
 //middle ware
 
 //for jwt
-// app.use(cors);
+app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 
